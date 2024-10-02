@@ -1,37 +1,32 @@
-import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect } from 'react';
-import 'react-native-reanimated';
+import { Link, Slot } from "expo-router";
+import { Text, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { useColorScheme } from '@/hooks/useColorScheme';
+export default function Layout(){
+    return(
+        <SafeAreaView>
+            
+            <View style={{height : "90%"}}>
+                <Slot/>
+            </View>
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
-SplashScreen.preventAutoHideAsync();
 
-export default function RootLayout() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
-  });
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
+            <View style={{backgroundColor : "yellow"}}>
+                <Link href={"/"}>
+                    <Text>Go to For You</Text>
+                </Link>
+                
+                <Link href={"/Explore"}>
+                    <Text>Go to Explore</Text>
+                </Link>
 
-  if (!loaded) {
-    return null;
-  }
+                <Link href={"/Account"}>
+                    <Text>Go to Acoount</Text>
+                </Link>
+            </View>
+            
+        </SafeAreaView>
 
-  return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="+not-found" />
-      </Stack>
-    </ThemeProvider>
-  );
+    )
 }
