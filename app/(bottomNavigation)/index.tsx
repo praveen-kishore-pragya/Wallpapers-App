@@ -1,10 +1,41 @@
-import { Text, View } from "react-native"
-import { SafeAreaView } from "react-native-safe-area-context"
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
+import { Image, SafeAreaView, Text, View } from 'react-native';
 
-export default function () {
-    return(
-        <SafeAreaView>
-            <Text>This is the For You section</Text>
-        </SafeAreaView>
-    )
+const Tab = createMaterialTopTabNavigator();
+
+export default function() {
+
+    const SuggestedScreen = () =>{
+        return (
+            <View>
+                <Text>Suggested Page</Text>
+            </View>
+        )
+    }
+    
+    const LikedScreen = () =>{
+        return (
+            <View>
+                <Text>Liked Page</Text>
+            </View>
+        )
+        
+    }
+    
+    const LibraryScreen = () =>{
+        return (
+            <View>
+                <Text>Library Page</Text>
+            </View>
+        )
+    }
+
+
+    return (
+            <Tab.Navigator>
+                <Tab.Screen name="Suggested" component={SuggestedScreen} />
+                <Tab.Screen name="Liked" component={LikedScreen} />
+                <Tab.Screen name="Library" component={LibraryScreen} />
+            </Tab.Navigator>
+    );
 }
